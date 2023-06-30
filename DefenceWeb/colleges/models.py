@@ -68,7 +68,7 @@ class News(models.Model):
     type= models.CharField(max_length=13, choices=News_type,default="News")
     image=models.ImageField(upload_to='news',null=True)
     description=models.TextField()
-    date=models.DateTimeField(auto_now_add=True)
+    date=models.DateField(auto_now_add=True)
     tags=models.ManyToManyField(College)
     def __str__(self):
         return self.Title
