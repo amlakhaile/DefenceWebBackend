@@ -5,6 +5,8 @@ from rest_framework.decorators import api_view
 from .models import College,News,Events,Partners,department,Univesity,Facilities
 from .serializers import CollageSerilizer,NewsSerilizer,EventsSerilizer,UniversitySerilizer,PartnerSerilizer,DepartmentSerilizer,FacilitySerilizer
 from django.http import HttpResponse
+from datetime import date
+from django.db.models import Q
 
 class Collageviewset(ReadOnlyModelViewSet):
     queryset=College.objects.all()
@@ -16,7 +18,11 @@ class Newsviewset(ReadOnlyModelViewSet):
     queryset=News.objects.all()
     serializer_class=NewsSerilizer
 class Eventsviewset(ReadOnlyModelViewSet):
-    queryset=Events.objects.all()
+    current_date = date.today()
+
+
+
+    queryset=Events.objects.filter(Q(date__gte=current_date))
     serializer_class=EventsSerilizer
 class PartnerViewset(ReadOnlyModelViewSet):
     def get_queryset(self):
