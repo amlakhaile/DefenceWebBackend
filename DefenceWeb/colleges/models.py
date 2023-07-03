@@ -31,6 +31,7 @@ class department(models.Model):
     name=models.CharField(max_length=100)
     photo=models.ImageField(upload_to='collage')
     college = models.ForeignKey(College,on_delete=models.CASCADE)
+
     def __str__(self):
         return self.name
 
@@ -84,3 +85,15 @@ class Facilities(models.Model):
         return self.Facilityname
 
 
+class Office(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length = 255)
+    contact_number = models.CharField(max_length = 14)
+    leader = models.CharField(max_length = 30)
+    leader_image = models.ImageField(null = True)
+    about = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    
