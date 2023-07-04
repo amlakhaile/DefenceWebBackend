@@ -1,4 +1,5 @@
 from django.db import models
+
 class College(models.Model):
     name = models.CharField(max_length = 70)
     leaderName = models.CharField(max_length = 70)
@@ -30,7 +31,8 @@ class Univesity(models.Model):
 class department(models.Model):
     name=models.CharField(max_length=100)
     photo=models.ImageField(upload_to='collage')
-    college = models.ForeignKey(College,on_delete=models.CASCADE)
+    college = models.ForeignKey(College, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.name
 
@@ -84,3 +86,28 @@ class Facilities(models.Model):
         return self.Facilityname
 
 
+class Office(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length = 255)
+    contact_number = models.CharField(max_length = 14)
+    
+    about = models.TextField()
+    college = models.ForeignKey(College, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class Staffmember(models.Model):
+    name = models.CharField(max_length=255)
+    academicRank = models.CharField(max_length=255, blank=True)
+    department = models.ForeignKey(department, on_delete=models.CASCADE)
+    startingDate = models.DateField(auto_now=False, auto_now_add=False, blank=True)
+    educationAttended = models.TextField(blank=True)
+    email = models.EmailField(max_length = 255, blank=True)
+    contact_number = models.CharField(max_length = 14, blank=True)
+    leader = models.CharField(max_length = 30, blank=True)
+    image = models.ImageField(upload_to='leader', null=True)
+    Office = models.ForeignKey(Office, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
