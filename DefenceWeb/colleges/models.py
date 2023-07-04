@@ -86,17 +86,6 @@ class Facilities(models.Model):
         return self.Facilityname
 
 
-class Office(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField(max_length = 255)
-    contact_number = models.CharField(max_length = 14)
-    
-    about = models.TextField()
-    college = models.ForeignKey(College, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
 class Staffmember(models.Model):
     name = models.CharField(max_length=255)
     academicRank = models.CharField(max_length=255, blank=True)
@@ -107,7 +96,26 @@ class Staffmember(models.Model):
     contact_number = models.CharField(max_length = 14, blank=True)
     leader = models.CharField(max_length = 30, blank=True)
     image = models.ImageField(upload_to='leader', null=True)
-    Office = models.ForeignKey(Office, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
+
+class Gallery(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='facilities', null=True)
+
+    def __str__(self):
+        return self.name
+class Office(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length = 255)
+    contact_number = models.CharField(max_length = 14)
+    leaderuser=models.ForeignKey(Staffmember,on_delete=models.CASCADE ,related_name='leaders')
+    staffmembers=models.ManyToManyField(Staffmember, related_name='members')
+    
+    about = models.TextField()
+    college = models.ForeignKey(College, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
