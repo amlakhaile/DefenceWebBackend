@@ -16,7 +16,10 @@ Collagerouter.register('partner', views.PartnerViewset, basename='collage-partne
 Collagerouter.register('department', views.DepartmentViewset, basename='collage-department')
 Collagerouter.register('facilities', views.FacilitiesViewset, basename='collage-facilities')
 Collagerouter.register('office', views.OfficeViewset, basename='collage-office')
-Collagerouter.register('staffmember', views.StaffmemberViewset, basename='collage-staffmember')
+Officerouter=routers.NestedSimpleRouter(Collagerouter,'office',lookup='office')
+
+Officerouter.register('staffmember', views.StaffmemberViewset, basename='office-staffmember')
+
 
 Collagerouter.register('gallery', views.GalleryViewset, basename='collage-gallery')
 
@@ -24,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('', include(Collagerouter.urls)),
+    path('',include(Officerouter.urls))
     
 ]
 if settings.DEBUG:
