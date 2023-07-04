@@ -51,7 +51,7 @@ class OfficeViewset(ReadOnlyModelViewSet):
 class StaffmemberViewset(ReadOnlyModelViewSet):
     def get_queryset(self):
        
-        return Staffmember.objects.filter(Office=self.kwargs['office_pk'])
+        return Staffmember.objects.all()
     
     serializer_class=StaffmemberSerilizer
 

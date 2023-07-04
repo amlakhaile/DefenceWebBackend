@@ -10,22 +10,21 @@ router.register('collages',views.Collageviewset)
 router.register('university',views.Universityviewset)
 router.register('News',views.Newsviewset)
 router.register('Events',views.Eventsviewset)
+router.register('staffmember',views.StaffmemberViewset,basename='staffmember')
 Collagerouter = routers.NestedSimpleRouter(router, 'collages', lookup='collage')
 Collagerouter.register('partner', views.PartnerViewset, basename='collage-partner')
 
 Collagerouter.register('department', views.DepartmentViewset, basename='collage-department')
 Collagerouter.register('facilities', views.FacilitiesViewset, basename='collage-facilities')
 Collagerouter.register('office', views.OfficeViewset, basename='collage-office')
-Officerouter=routers.NestedSimpleRouter(Collagerouter,'office',lookup='office')
 
-Officerouter.register('staffmember', views.StaffmemberViewset, basename='office-staffmember')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('', include(Collagerouter.urls)),
-    path('',include(Officerouter.urls))
+   
     
 ]
 if settings.DEBUG:
