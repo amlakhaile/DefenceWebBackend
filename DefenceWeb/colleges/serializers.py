@@ -37,19 +37,9 @@ class FacilitySerilizer(serializers.ModelSerializer):
 class OfficeSerilizer(serializers.ModelSerializer):
     class Meta:
         model=Office
-        fields=['id','name','email','contact_number', 'about']
+        fields=['id','name','email','contact_number', 'about','leaderuser','staffmembers']
 
 class StaffmemberSerilizer(serializers.ModelSerializer):
     class Meta:
         model=Staffmember
-<<<<<<< HEAD
         fields=['id','name','academicRank','department','startingDate','educationAttended','email','contact_number','leader','image']
-=======
-        fields=['id','name','academicRank','department','startingDate','educationAttended','email','contact_number','leader','image','Office']
-
-
-class GallerySerilizer(serializers.ModelSerializer):
-    class Meta:
-        model=Gallery
-        fields=['id','name','image']
->>>>>>> 5b3a6c5d58a6ce7e812b7fe0ae63f9aaa9ec7ace
