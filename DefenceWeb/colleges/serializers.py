@@ -43,3 +43,8 @@ class StaffmemberSerilizer(serializers.ModelSerializer):
     class Meta:
         model=Staffmember
         fields=['id','name','academicRank','department','startingDate','educationAttended','email','contact_number','leader','image']
+
+class GallerySerilizer(serializers.ModelSerializer):
+    class Meta:
+        model=Gallery
+        fields=['id','name','image']
