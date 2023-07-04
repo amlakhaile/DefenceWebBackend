@@ -6,8 +6,27 @@ admin.site.register(Events)
 admin.site.register(department)
 admin.site.register(Partners)
 admin.site.register(HelpTexts)
-admin.site.register(Univesity)
+
 admin.site.register(Facilities)
-admin.site.register(Office)
+
 admin.site.register(Staffmember)
 admin.site.register(Gallery)
+
+
+class OfficeAdmin(admin.ModelAdmin):
+   
+   
+   def has_delete_permission(self, request, obj=None):
+        return False
+
+admin.site.register(Office, OfficeAdmin)
+class UniversityAdmin(admin.ModelAdmin):
+    def has_delete_permission(self, request, obj=None):
+        return False
+    def has_add_permission(self, request, obj=None):
+         if Univesity.objects.exists():
+             return False
+         else:
+             return True
+
+admin.site.register(Univesity, UniversityAdmin)

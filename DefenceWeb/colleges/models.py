@@ -1,3 +1,4 @@
+from typing import Any, Dict, Iterable, Optional, Tuple
 from django.db import models
 
 class College(models.Model):
@@ -94,8 +95,9 @@ class Staffmember(models.Model):
     educationAttended = models.TextField(blank=True)
     email = models.EmailField(max_length = 255, blank=True)
     contact_number = models.CharField(max_length = 14, blank=True)
-    leader = models.CharField(max_length = 30, blank=True)
+    leader_role = models.CharField(max_length = 30, blank=True)
     image = models.ImageField(upload_to='leader', null=True)
+    
 
     def __str__(self):
         return self.name
@@ -106,16 +108,40 @@ class Gallery(models.Model):
 
     def __str__(self):
         return self.name
+
 class Office(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField(max_length = 255)
-    contact_number = models.CharField(max_length = 14)
-    leaderuser=models.ForeignKey(Staffmember,on_delete=models.CASCADE ,related_name='leaders')
-    staffmembers=models.ManyToManyField(Staffmember, related_name='members')
-    
+    OFFICE_CHOICES = (
+        ('Commandant Office', 'Commandant Office'),
+        ('Foreign Relation Office', 'Foreign Relation Office'),
+        ('Academic Office', 'Academic Office'),
+        ('Quality Assurance Office', 'Quality Assurance Office'),
+        ('Post Graduation Office', 'Post Graduation Office'),
+        ('Registrar Office', 'Registrar Office'),
+        ('Logistics and Housing Office', 'Logistics and Housing Office'),
+        ('Law Office', 'Law Office'),
+        ('Student Council Office', 'Student Council Office'),
+        ('Office of Human Resource', 'Office of Human Resource'),
+        ('Office of Security', 'Office of Security')
+    )
+    name = models.CharField(max_length=30, choices=OFFICE_CHOICES, default='Academic Office')
+    email = models.EmailField(max_length=255)
+    contact_number = models.CharField(max_length=14)
+    leaderuser = models.ForeignKey(Staffmember, on_delete=models.CASCADE, related_name='leaders')
+    staffmembers = models.ManyToManyField(Staffmember, related_name='members')
     about = models.TextField()
     college = models.ForeignKey(College, on_delete=models.CASCADE)
 
+    class Meta:
+        unique_together = ('name', 'college')
+
     def __str__(self):
-        return self.name
+        return str(self.college)+" "+self.name
+    
+
+
+        
+        
+  
+   
+
 
