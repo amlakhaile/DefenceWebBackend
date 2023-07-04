@@ -110,8 +110,8 @@ class Office(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(max_length = 255)
     contact_number = models.CharField(max_length = 14)
-    leader=models.ForeignKey(Staffmember,on_delete=models.CASCADE)
-    Staffmember=models.ManyToManyField(Staffmember)
+    leaderuser=models.ForeignKey(Staffmember,on_delete=models.CASCADE ,related_name='leaders')
+    staffmembers=models.ManyToManyField(Staffmember, related_name='members')
     
     about = models.TextField()
     college = models.ForeignKey(College, on_delete=models.CASCADE)
