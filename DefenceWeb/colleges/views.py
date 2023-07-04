@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.decorators import api_view
-from .models import College,News,Events,Partners,department,Univesity,Facilities,Office
-from .serializers import CollageSerilizer,NewsSerilizer,EventsSerilizer,UniversitySerilizer,PartnerSerilizer,DepartmentSerilizer,FacilitySerilizer,OfficeSerilizer
+from .models import College,News,Events,Partners,department,Univesity,Facilities,Office, Staffmember
+from .serializers import CollageSerilizer,NewsSerilizer,EventsSerilizer,UniversitySerilizer,PartnerSerilizer,DepartmentSerilizer,FacilitySerilizer,OfficeSerilizer, StaffmemberSerilizer
 from django.http import HttpResponse
 from datetime import date
 from django.db.models import Q
@@ -43,6 +43,17 @@ class FacilitiesViewset(ReadOnlyModelViewSet):
 class OfficeViewset(ReadOnlyModelViewSet):
     def get_queryset(self):
        
-        return Office.objects.filter(college=self.kwargs['office_pk'])
+        return Office.objects.filter(college=self.kwargs['collage_pk'])
     
     serializer_class=OfficeSerilizer
+
+
+class StaffmemberViewset(ReadOnlyModelViewSet):
+    def get_queryset(self):
+       
+        return Staffmember.objects.filter(office=self.kwargs['office_pk'])
+    
+    serializer_class=StaffmemberSerilizer
+
+
+

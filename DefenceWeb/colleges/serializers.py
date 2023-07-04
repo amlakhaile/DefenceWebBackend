@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import College,News,Events,department,Partners,HelpTexts,Univesity,Facilities, Office
+from .models import College,News,Events,department,Partners,HelpTexts,Univesity,Facilities, Office, Staffmember
 from django.shortcuts import get_object_or_404
 class CollageSerilizer(serializers.ModelSerializer):
     class Meta:
@@ -37,4 +37,9 @@ class FacilitySerilizer(serializers.ModelSerializer):
 class OfficeSerilizer(serializers.ModelSerializer):
     class Meta:
         model=Office
-        fields=['id','name','email','contact_number','leader', 'leader_image', 'about']
+        fields=['id','name','email','contact_number', 'about']
+
+class StaffmemberSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model=Staffmember
+        fields=['id','name','academicRank','department','startingDate','educationAttended','email','contact_number','leader','image','office']

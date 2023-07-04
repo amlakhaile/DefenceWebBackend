@@ -15,6 +15,9 @@ Collagerouter.register('partner', views.PartnerViewset, basename='collage-partne
 
 Collagerouter.register('department', views.DepartmentViewset, basename='collage-department')
 Collagerouter.register('facilities', views.FacilitiesViewset, basename='collage-facilities')
+Collagerouter.register('office', views.OfficeViewset, basename='collage-office')
+Collagerouter.register('staffmember', views.StaffmemberViewset, basename='collage-staffmember')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
