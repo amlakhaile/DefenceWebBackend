@@ -99,6 +99,13 @@ class Staffmember(models.Model):
 
     def __str__(self):
         return self.name
+
+class Gallery(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='facilities', null=True)
+
+    def __str__(self):
+        return self.name
 class Office(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(max_length = 255)

@@ -20,6 +20,8 @@ Collagerouter.register('office', views.OfficeViewset, basename='collage-office')
 
 
 
+Collagerouter.register('gallery', views.GalleryViewset, basename='collage-gallery')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
