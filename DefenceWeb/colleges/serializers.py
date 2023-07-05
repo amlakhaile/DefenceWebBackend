@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import College,News,Events,department,Partners,HelpTexts,Univesity,Facilities, Office, Staffmember, Gallery
+from .models import College,News,Events,department,Partners,HelpTexts,Univesity,Facilities, Office, Staffmember, Gallery, Departmentfacilities, Programs
 from django.shortcuts import get_object_or_404
 class CollageSerilizer(serializers.ModelSerializer):
     class Meta:
@@ -12,7 +12,7 @@ class UniversitySerilizer(serializers.ModelSerializer):
 class DepartmentSerilizer(serializers.ModelSerializer):
     class Meta:
         model=department
-        fields=['id','name','photo','college']
+        fields=['id','name','photo','college','background', 'historyofdepartment', 'scope', 'academicgoals','academicprogram', 'admissionrequirement', 'email', 'officephone', 'fax']
 class PartnerSerilizer(serializers.ModelSerializer):
     class Meta:
         model=Partners
@@ -42,9 +42,19 @@ class OfficeSerilizer(serializers.ModelSerializer):
 class StaffmemberSerilizer(serializers.ModelSerializer):
     class Meta:
         model=Staffmember
-        fields=['id','name','academicRank','department','startingDate','educationAttended','email','contact_number','leader_role','image']
+        fields=['id','name','academicRank','department','startingDate','educationAttended','email','contact_number','leader_role','image','facebooklink', 'biography', 'linkedin', 'researchInterest']
 
 class GallerySerilizer(serializers.ModelSerializer):
     class Meta:
         model=Gallery
         fields=['id','name','image']
+
+class DepartmentfacilitiesSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model=Departmentfacilities
+        fields=['id','name','image', 'about', 'department']
+
+class ProgramsSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model=Programs
+        fields=['id','name','photo', 'college']

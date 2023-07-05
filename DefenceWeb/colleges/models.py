@@ -33,6 +33,24 @@ class department(models.Model):
     name=models.CharField(max_length=100)
     photo=models.ImageField(upload_to='collage')
     college = models.ForeignKey(College, on_delete=models.CASCADE)
+    background = models.TextField(null=True, blank=True)
+    historyofdepartment = models.TextField(null=True, blank=True)
+    scope = models.TextField(null = True, blank=True)
+    academicgoals = models.TextField(null = True, blank=True)
+    academicprogram = models.TextField(null = True, blank=True)
+    admissionrequirement = models.TextField(null=True, blank=True)
+    email = models.EmailField(max_length=254, null=True, blank=True)
+    officephone = models.CharField(max_length=50, null=True, blank=True)
+    fax = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+    
+class Departmentfacilities(models.Model):
+    name = models.CharField(max_length = 255, null=True, blank=True)
+    image = models.ImageField(upload_to='collage', null=True, blank=True)
+    about = models.TextField(null=True, blank=True)
+    department = models.ForeignKey(department, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -144,8 +162,12 @@ class Office(models.Model):
 
 
         
-        
-  
+class Programs(models.Model):
+    name=models.CharField(max_length=100, null=True, blank=True)
+    photo=models.ImageField(upload_to='collage', null=True, blank=True)
+    college = models.ForeignKey(College, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
    
 
 
