@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.decorators import api_view
-from .models import College,News,Events,Partners,department,Univesity,Facilities,Office, Staffmember,Gallery
-from .serializers import CollageSerilizer,NewsSerilizer,EventsSerilizer,UniversitySerilizer,PartnerSerilizer,DepartmentSerilizer,FacilitySerilizer,OfficeSerilizer, StaffmemberSerilizer, GallerySerilizer
+from .models import College,News,Events,Partners,department,Univesity,Facilities,Office, Staffmember,Gallery, Programs, Departmentfacilities
+from .serializers import CollageSerilizer,NewsSerilizer,EventsSerilizer,UniversitySerilizer,PartnerSerilizer,DepartmentSerilizer,FacilitySerilizer,OfficeSerilizer, StaffmemberSerilizer, GallerySerilizer, ProgramsSerilizer, DepartmentfacilitiesSerilizer
 from django.http import HttpResponse
 from datetime import date
 from django.db.models import Q
@@ -33,6 +33,20 @@ class DepartmentViewset(ReadOnlyModelViewSet):
         return department.objects.filter(college=self.kwargs['collage_pk'])
     
     serializer_class=DepartmentSerilizer
+
+class ProgramsViewset(ReadOnlyModelViewSet):
+    def get_queryset(self):
+       
+        return Programs.objects.filter(college=self.kwargs['collage_pk'])
+    
+    serializer_class=ProgramsSerilizer
+
+class DepartmentfacilitiesViewset(ReadOnlyModelViewSet):
+    def get_queryset(self):
+       
+        return Departmentfacilities.objects.filter(department=self.kwargs['department_pk'])
+    
+    serializer_class=DepartmentfacilitiesSerilizer
 class FacilitiesViewset(ReadOnlyModelViewSet):
     def get_queryset(self):
        
