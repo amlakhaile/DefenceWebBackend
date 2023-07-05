@@ -97,6 +97,10 @@ class Staffmember(models.Model):
     contact_number = models.CharField(max_length = 14, blank=True)
     leader_role = models.CharField(max_length = 30, blank=True)
     image = models.ImageField(upload_to='leader', null=True)
+    facebooklink = models.CharField(max_length=255, null=True)
+    biography = models.TextField(null=True)
+    linkedin = models.CharField(max_length = 255, null=True)
+    researchInterest = models.TextField(null=True)
     
 
     def __str__(self):
