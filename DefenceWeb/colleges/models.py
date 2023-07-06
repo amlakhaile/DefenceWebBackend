@@ -119,7 +119,7 @@ class Staffmember(models.Model):
     biography = models.TextField(null=True)
     linkedin = models.CharField(max_length = 255, null=True)
     researchInterest = models.TextField(null=True)
-    
+    college = models.ForeignKey(College, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
